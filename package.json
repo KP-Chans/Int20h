@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/KP-Chans/Int20h/issues"
   },
-  "homepage": "https://github.com/KP-Chans/Int20h#readme"
+  "homepage": "https://github.com/KP-Chans/Int20h#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mustache-express": "^1.3.0",
+    "path": "^0.12.7"
+  }
 }
