@@ -1,0 +1,20 @@
+{
+  "name": "int20h",
+  "version": "1.0.0",
+  "description": "НА ХАКАТОН",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KP-Chans/Int20h.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KP-Chans/Int20h/issues"
+  },
+  "homepage": "https://github.com/KP-Chans/Int20h#readme"
+}
