@@ -4,4 +4,7 @@
 Dependencies
 npm i mustache-express
 npm install express --save
-inp install path
+npm install path
+npm install request
+npm install body-parser
+npm install axios
