@@ -1,8 +1,10 @@
-<h1>Hello World<h1>
-
 <form action="/lyrics" method='POST'>
-    <input type='text' name="lyrics" id="lyrics"><br>
-	<input type="submit" value="Search">
+    <span>Enter lyrics...</span><br>
+	<input type='text' name="lyrics" id="lyrics" ><br>
+	<span>...or enter URL</span><br>
+	<input type='url' name="url" id="url"><br>
+
+	<input type="submit" value="Find track">
 </form>
 
 {{#trackId}}
@@ -23,6 +25,9 @@
 			w[i].appendChild(el);
 		}
 }());
+
+	let lyricsText = document.getElementById(lyrics);
+	console.log("----" + lyricsText.toString());
 </script>
 <div class="deezer-widget-player" data-src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id={{trackId}}&app_id=1" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="700" data-height="350"></div>
 {{/trackId}}
