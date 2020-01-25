@@ -29,10 +29,12 @@ const recordAudio = () =>
                         url: "https://api.audd.io/",
                         type: 'POST',
                         api_token: '080f948aefc35f2fbd64c7205fcc5c14',
+
                         data: data,
                         contentType: false,
                         processData: false,
                         success: function (data) {
+
                             fetch('/audio', {
                                 method: 'POST',
                                 headers: {
@@ -46,6 +48,7 @@ const recordAudio = () =>
                                 window.location.replace("/?id=" + data);
                             })
                             .catch(err => console.log(err))
+
                         }
                     });
                     const audio = new Audio(audioUrl);
