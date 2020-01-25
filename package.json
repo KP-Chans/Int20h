@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/KP-Chans/Int20h#readme",
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
@@ -26,5 +26,6 @@
     "node-fetch": "^2.6.0",
     "path": "^0.12.7",
     "request": "^2.88.0"
-  }
+  },
+  "devDependencies": {}
 }

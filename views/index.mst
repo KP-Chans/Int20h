@@ -1,12 +1,43 @@
-<h1>Hello World<h1>
+<html>
+<head>
+    <title>MUZZAKIN</title>
+    <link type="text/css" href="../stylesheets/style.css" rel="stylesheet" />
+	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<form action="/lyrics" method='POST'>
-    <input type='text' name="lyrics" id="lyrics"><br>
-	<input type="submit" value="Search">
+</head>
+<body>
+
+<div class="navbar navbar-expand-sm bg-dark navbar-dark ">
+<div class="container">
+<span class="logo">MUZZAKIN</span>
+<div class="butn">
+<button class="tablink btn text-white " onclick="openPage('1', this, 'green')" id="defaultOpen">search by lyrics</button>
+<button class="tablink btn text-white" onclick="openPage('2', this, 'blue')">search by sound</button>
+</div>
+</div>
+</div>
+<div class="container">
+<div id="1" class="tabcontent">
+<form action="/lyrics" class="action" method="POST">
+<div class="row">
+	<input class="form-control col-lg-10 col-md-9 col-sm-6" type="text" name="lyrics" id="lyrics" placeholder="Search" aria-label="Search"><br>
+	<input type="submit" class="col-lg-2 col-md-3 col-sm-6" value="Search">
+</div>
 </form>
+</div>
 
-{{#trackId}}
-<iframe scrolling="no" frameborder="0" allowTransparency="true" src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id={{trackId}}&app_id=1"  width="80%" height="100%"></iframe>
+<div id="2" class="tabcontent">
+<div class="action2">
+<button id="action" class="btn btn-success" onclick="handleAction()">Start recording...</button>
+</div>
+</div>
+
+
+<iframe scrolling="no" allowtransparency="true" src="https://www.deezer.com/plugins/player?format=classic&amp;autoplay=false&amp;playlist=true&amp;width=700&amp;height=350&amp;color=fff&amp;layout=dark&amp;size=medium&amp;type=tracks&amp;id={{trackId}}&amp;app_id=1" width="100%" height="100%" frameborder="0"></iframe>
 <script>
 	(function() {
 		var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
@@ -24,5 +55,38 @@
 		}
 }());
 </script>
-<div class="deezer-widget-player" data-src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=tracks&id={{trackId}}&app_id=1" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="700" data-height="350"></div>
-{{/trackId}}
+<div class="deezer-widget-player" data-src="https://www.deezer.com/plugins/player?format=classic&amp;autoplay=false&amp;playlist=true&amp;width=700&amp;height=350&amp;color=ff0000&amp;layout=dark&amp;size=medium&amp;type=tracks&amp;id={{trackId}}&amp;app_id=1" data-scrolling="no" data-frameborder="0" data-allowtransparency="true" data-width="700" data-height="350"></div>
+
+
+</div>
+</div>
+
+
+<script>
+function openPage(pageName, elmnt, color) {
+  // Hide all elements with class="tabcontent" by default */
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Remove the background color of all tablinks/buttons
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+
+  // Show the specific tab content
+  document.getElementById(pageName).style.display = "block";
+
+  // Add the specific color to the button used to open the tab content
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html>
