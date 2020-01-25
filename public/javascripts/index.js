@@ -24,11 +24,10 @@ const recordAudio = () =>
 
                     var data = new FormData();
                     data.append('file', audioBlob);
-                    data.append('api_token', '080f948aefc35f2fbd64c7205fcc5c14')
+                    data.append('api_token', 'bd98d9fc3a624550e39e4d73f5b804f6')
                     $.ajax({
                         url: "https://api.audd.io/",
                         type: 'POST',
-                        api_token: '080f948aefc35f2fbd64c7205fcc5c14',
 
                         data: data,
                         contentType: false,
@@ -44,8 +43,10 @@ const recordAudio = () =>
                             })
                             .then(x => x.json())
                             .then(function(data) {
-                                console.log(data);
-                                window.location.replace("/?id=" + data);
+                                if (data)
+                                    window.location.replace("/?id=" + data.id + "&title=" + data.title + "&artist=" + data.artist.name);
+                                else 
+                                    window.location.replace("/");
                             })
                             .catch(err => console.log(err))
 

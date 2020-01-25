@@ -3,9 +3,10 @@ const mustache = require('mustache-express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const routeIndex = require('./routes/index');
+const config = require('./config/config');
 
 const app = express();
-const port = 3000;
+const port = config.ServerPort;
 const viewsDir = path.join(__dirname, 'views');
 
 app.use(express.static('public'));

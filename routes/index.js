@@ -1,22 +1,21 @@
 const express = require('express');
 const request = require("request");
 const axios = require('axios');
-const fs = require('fs');
+const config = require('../config/config');
 const router = express.Router();
 
 router.get('/', function (req, res) {
-
     res.render('index', {
-        trackId: req.query.id
-
+        trackId: req.query.id,
+        title: req.query.title,
+        artist: req.query.artist
     });
 })
 
 router.post('/lyrics', function (req, ress) {
     var data = {
         'q': req.body.lyrics,
-        'api_token': '080f948aefc35f2fbd64c7205fcc5c14'
-
+        'api_token': config.apiToken
     };
 
     request({
@@ -24,42 +23,35 @@ router.post('/lyrics', function (req, ress) {
         formData: data,
         method: 'POST'
     }, function (err, res, body) {
-        console.log(JSON.parse(body).result[0].title);
-        let a = "https://api.deezer.com/search/track/?q=" + JSON.parse(body).result[0].title + "&index=0&limit=2&output=json";
-        axios.get(a, "")
-            .then(x => {
-                console.log(x.data.data[0].id);
-                ress.redirect('/?id=' + x.data.data[0].id);
-            })
-            .catch(err => console.log(err))
+        if (JSON.parse(body).result[0]) {
+            let a = "https://api.deezer.com/search/track/?q=" + JSON.parse(body).result[0].title + "&index=0&limit=2&output=json";
+            axios.get(a, "")
+                .then(x => {
+                    if (x.data.data[0]) 
+                        ress.redirect('/?id=' + x.data.data[0].id + '&title=' + x.data.data[0].title + '&artist=' + x.data.data[0].artist.name);
+                    else 
+                        ress.redirect('/');
+                })
+                .catch(err => console.log(err))
+        }
+        else {
+            ress.redirect('/');
+        }
     })
 })
 
-router.post('/audio', function (req, ress) {
-    console.log(req.body);
-    let a = "https://api.deezer.com/search/track/?q=" + req.body.result.title + "&index=0&limit=2&output=json";
-    axios.get(a, "")
-        .then(x => {
-            console.log(x.data.data[0].id);
-            // window.location.replace('/?id=' + x.data.data[0].id);
-            req.method = 'get';
-            ress.redirect('/?id=' + x.data.data[0].id);
-        })
-        .catch(err => console.log(err))
-
-})
-
 router.post('/audio', function (req, res) {
-    console.log(req.body);
-    let a = "https://api.deezer.com/search/track/?q=" + req.body.result.title + "&index=0&limit=2&output=json";
-    axios.get(a, "")
-        .then(x => {
-            console.log(x.data.data[0].id);
-
-            res.json(x.data.data[0].id);
-        })
-        .catch(err => console.log(err))
-
+    if (req.body.result) {
+        let a = "https://api.deezer.com/search/track/?q=" + req.body.result.title + "&index=0&limit=2&output=json";
+        axios.get(a, "")
+            .then(x => {
+                res.json(x.data.data[0]);
+            })
+            .catch(err => console.log(err))
+    }
+    else {
+        res.json(null);
+    }
 })
 
 module.exports = router;
