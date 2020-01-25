@@ -44,7 +44,7 @@ router.post('/lyrics', function(req, ress) {
     };
 
     request({
-        uri: 'https://api.audd.io/',
+        uri: 'https://api.audd.io/findLyrics/',
         formData: data,
         method: 'POST'
     }, function(err, res, body) {
@@ -58,6 +58,21 @@ router.post('/lyrics', function(req, ress) {
             .catch(err => console.log(err))
 
     });
+
+})
+
+router.post('/audio', function(req, ress) {
+    console.log(req.body);
+    let a = "https://api.deezer.com/search/track/?q=" + req.body.result.title + "&index=0&limit=2&output=json";
+    axios.get(a, "")
+        .then(x => {
+            console.log(x.data.data[0].id);
+            // window.location.replace('/?id=' + x.data.data[0].id);
+            req.method = 'get';
+            ress.redirect('/?id=' + x.data.data[0].id);
+        })
+        .catch(err => console.log(err))
+
 })
 
 module.exports = router;
